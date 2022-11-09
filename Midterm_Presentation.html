@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title> Midterm Project</title>
+    <meta charset="utf-8" />
+    <meta name="author" content=" Joe Bouchie " />
+    <script src="libs/header-attrs-2.16/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# <img src="./figures/bat-cartoon.png" /> Midterm Project
+]
+.author[
+### <font size="5"> Joe Bouchie </font>
+]
+
+---
+
+&lt;style&gt;
+
+.remark-slide-content {
+  background-color: #FFFFFF;
+  border-top: 80px solid #F9C389;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.5;
+  padding: 1em 2em 1em 2em
+}
+
+.inverse {
+  background-color: #696767;
+  border-top: 80px solid #696767;
+  text-shadow: none;
+  background-image: url(https://github.com/goodekat/presentations/blob/master/2019-isugg-gganimate-spooky/figures/spider.png?raw=true);
+	background-position: 50% 75%;
+  background-size: 150px;
+}
+
+.your-turn{
+  background-color: #8C7E95;
+  border-top: 80px solid #F9C389;
+  text-shadow: none;
+  background-image: url(https://github.com/goodekat/presentations/blob/master/2019-isugg-gganimate-spooky/figures/spider.png?raw=true);
+	background-position: 95% 90%;
+  background-size: 75px;
+}
+
+.title-slide {
+  background-color: #F9C389;
+  border-top: 80px solid #F9C389;
+  background-image: none;
+}
+
+.title-slide &gt; h1  {
+  color: #111111;
+  font-size: 40px;
+  text-shadow: none;
+  font-weight: 400;
+  text-align: left;
+  margin-left: 15px;
+  padding-top: 80px;
+}
+.title-slide &gt; h2  {
+  margin-top: -25px;
+  padding-bottom: -20px;
+  color: #111111;
+  text-shadow: none;
+  font-weight: 300;
+  font-size: 35px;
+  text-align: left;
+  margin-left: 15px;
+}
+.title-slide &gt; h3  {
+  color: #111111;
+  text-shadow: none;
+  font-weight: 300;
+  font-size: 25px;
+  text-align: left;
+  margin-left: 15px;
+  margin-bottom: -30px;
+}
+
+
+
+
+&lt;/style&gt;
+---
+#Graph 1
+
+.left-code[
+
+```r
+df %&gt;% 
+  ggplot()+
+  geom_boxplot(mapping = aes(x = age, y = payer))+
+  labs(x='Age',y='Payer',
+       title='Age Distributions Based on Payer',
+       caption='Box plot summarizing distribution for patient age for each payer.')
+```
+]
+.right-plot[
+&lt;img src="Midterm_Presentation_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+#Graph 2
+
+.left-code[
+
+```r
+df %&gt;% 
+  group_by(raceethn, sex) %&gt;% 
+  summarise(average_age=mean(age, na.rm=TRUE)) %&gt;% 
+  ggplot()+ geom_col(mapping=aes(x=raceethn, y=average_age), 
+           position = 'dodge')+ labs(x='Race', y = 'Average Age', 
+       title = 'Average Age of Patient by Race', caption = 'White patients have a significantly higher average age when compared to other races.')
+```
+]
+.right-plot[
+&lt;img src="Midterm_Presentation_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+#Graph 3
+
+.left-code[
+
+```r
+df %&gt;% 
+  ggplot()+
+  geom_boxplot(mapping = aes(x = age, y = admtype))+
+  labs(x='Age', y='Type of Admission',
+       title='Age Distributions Based on Type of Admission',
+       caption='Box plot summarizing distribution  
+       for patient age for each type of admission.')
+```
+]
+.right-plot[
+&lt;img src="Midterm_Presentation_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+#Graph 4
+
+.left-code[
+
+```r
+df %&gt;% ggplot()+
+  geom_bar(mapping = aes(x = season))+
+  labs(x='Season',y='Patients',
+       title='Count of Patient per Season',
+       caption='Bar chart shows that Spring had
+       the most patients admitted of any season.')
+```
+]
+.right-plot[
+&lt;img src="Midterm_Presentation_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+#Graph 5
+
+.left-code[
+
+```r
+df %&gt;% 
+  ggplot()+
+  geom_point(mapping = aes(x = los, y = tot, color = sex))+
+  labs(x='Length of Stay',y='Total Charge',
+       title='Relationship Between Length of Stay Total Charge Rates by Sex', caption='Positive relationship between length of stay and total charge.')
+```
+]
+.right-plot[
+&lt;img src="Midterm_Presentation_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+#Graph 6
+
+.left-code[
+
+```r
+df %&gt;% 
+  ggplot()+
+  geom_bar(mapping = aes(x = moa, fill=admtype), position="fill")+
+  labs(x='Month',y='Proportion',
+       title='Admission Type Proportions per Month',
+       caption='This chart shows a consistent pattern in admission type throughout the year')
+```
+]
+.right-plot[
+&lt;img src="Midterm_Presentation_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+#Graph 7
+
+.left-code[
+
+```r
+df %&gt;% 
+  ggplot()+
+  geom_bar(mapping = aes(x = moa, fill=sex))+
+  labs(x='Month', y='Number of Patients',
+       title='Number of Patients per Month',
+       caption='This chart shows that January, May, and October have the most patients.')
+```
+]
+.right-plot[
+&lt;img src="Midterm_Presentation_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+#Graph 8
+
+.left-code[
+
+```r
+df %&gt;% 
+  group_by(admtype, sex) %&gt;% 
+  summarise(average_tot=mean(tot, na.rm=TRUE)) %&gt;% 
+  ggplot()+ geom_col(mapping=aes(x=admtype, y=average_tot), position = 'dodge')+ labs(x='Type of Admission', y = 'Average Cost', title = 'Average Cost by Type of Admission', caption = 'Court Committals cost the greatest on average, while Newborns cost the least on average.')
+```
+]
+.right-plot[
+&lt;img src="Midterm_Presentation_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+#Graph 9
+
+.left-code[
+
+```r
+df %&gt;% 
+  group_by(raceethn, sex) %&gt;% 
+  summarise(average_los=mean(los, na.rm=TRUE)) %&gt;% 
+  ggplot()+ geom_col(mapping=aes(x=raceethn, y=average_los),position = 'dodge')+ labs(x='Race',y = 'Average Length of Stay', title = 'Average Length of Stay by Race', caption = 'White have the longest length of stay on average, while Asians have the shortest.')
+```
+]
+.right-plot[
+&lt;img src="Midterm_Presentation_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+#Graph 10
+
+.left-code[
+
+```r
+df %&gt;% 
+  ggplot()+
+  geom_point(mapping = aes(x = los, y = tot))+ facet_wrap(~payer)+
+  labs(x='Length of Stay', y='Total Charge', title='Relationship Between Length of Stay Total Charge Rates by Payer', caption='All payers follow expected trend, but Workers Compensation and Self Pay are more abbreviated in their length of stay.')
+```
+]
+.right-plot[
+&lt;img src="Midterm_Presentation_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+#Bar Race
+
+.left-code[
+
+```r
+d1 &lt;- df %&gt;% group_by(moa, payer) %&gt;% summarise(mean = mean(tot))
+d2 &lt;- d1 %&gt;% group_by(moa) %&gt;% mutate(rank=rank(-mean)) 
+d3 &lt;- d2 %&gt;% filter(rank &lt;= 10)
+a1 &lt;- d3 %&gt;% ggplot(aes(x=rank, y=mean, group=payer, fill=payer, label=payer)) + geom_col()+ geom_text(aes(y = mean, label = payer), hjust = 1.4)+ coord_flip(clip = "off", expand = FALSE) +scale_x_reverse()+ labs(title = 'Month {closest_state}', x='', y='Total Number of Patients', fill='payer')+
+    theme(plot.title = element_text(hjust = 1, size = 22),
+          axis.ticks.y = element_blank(),
+          axis.text.y  = element_blank()) + 
+    transition_states(moa)+ ease_aes("cubic-in-out")
+animate(a1, nframes = 400)
+```
+]
+.right-plot[
+&lt;img src="Midterm_Presentation_files/figure-html/unnamed-chunk-12-1.gif" style="display: block; margin: auto;" /&gt;
+]
+
+
+```r
+library(dplyr)
+df &lt;- read_sas('C:/Users/student/OneDrive - Bryant University/Documents/R/Math421/hdd0318cy.sas7bdat')
+
+df &lt;- df %&gt;% select(-payfix, -preopday, -obs_hour, -nicu_day)
+df$target &lt;- case_when(
+  df$tot &lt;= median(df$tot) ~ 'low',
+  TRUE ~ 'high'
+)
+
+df$provider &lt;- case_when(
+  df$provider == 7201 ~ 'Newport',
+  df$provider == 7202 ~ 'St. Joseph',
+  df$provider == 7203 ~ 'Memorial',
+  df$provider == 7204 ~ 'Miriam',
+  df$provider == 7205 ~ 'Rhode Island Hospital',
+  df$provider == 7206 ~ 'Roger Williams',
+  df$provider == 7209 ~ 'South County',
+  df$provider == 7210 ~ 'Kent County',
+  df$provider == 7211 ~ 'Westerly',
+  df$provider == 7212 ~ 'Rehab of RI',
+  df$provider == 7213 ~ 'Landmark Medical Center',
+  df$provider == 7214 ~ 'Women and Infants',
+  df$provider == 7215 ~ 'Bradley',
+  TRUE ~ 'Butler'
+)
+
+
+df$campus &lt;- case_when(
+  df$campus == 0 ~ 'Hospital Has Only One Premise',
+  df$campus == 1 ~ 'St. Joseph Health Services of Rhode Island - Our Lady of Fatima Hospital',
+  df$campus == 2 ~ 'St. Joseph Health Services of Rhode Island - St. Joseph Hospital for Specialty Care',
+  df$campus == 3 ~ 'Rhode Island Hospital - Adult',
+  TRUE ~ 'Rhode Island Hospital - Hasbro'
+)
+
+df2 &lt;- df %&gt;% select("target", "age", "sex", "raceethn", "provider", "moa", "mod", "admtype", "campus", "los")
+
+library(caret)
+
+df2 &lt;- df2 %&gt;% 
+  filter(raceethn!='',admtype!='') %&gt;% 
+  mutate(target=as.factor(target),
+         age=age,
+         sex=as.factor(sex),
+         raceethn=as.factor(raceethn),
+         provider=as.factor(provider),
+         moa=moa,
+         mod=mod,
+         admtype=as.factor(admtype),
+         campus=as.factor(campus),
+         los=los)
+
+set.seed(2020)
+splitIndex &lt;- createDataPartition(df2$target, p = .1,
+                                  list = FALSE)
+
+df_train &lt;- df2[ splitIndex,]
+df_test &lt;- df2[-splitIndex,]
+
+library(rattle)
+library(rpart)
+
+tree_model &lt;- rpart(target ~ ., data = df_train,
+                    control = rpart.control(maxdepth = 3))
+pred &lt;- predict(tree_model, df_test, type = "class")
+cm &lt;- confusionMatrix(data = pred, reference = df_test$target, positive = "low")
+cm$overall[1]
+```
+
+```
+##  Accuracy 
+## 0.7410137
+```
+
+```r
+fancyRpartPlot(tree_model)
+```
+
+&lt;img src="Midterm_Presentation_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+```r
+barplot(tree_model$variable.importance)
+```
+
+&lt;img src="Midterm_Presentation_files/figure-html/unnamed-chunk-13-2.png" style="display: block; margin: auto;" /&gt;
+
+```r
+library(mlbench)
+trControl = trainControl(method = "cv",
+                         number = 5)
+
+tuneGrid = expand.grid(mtry = 2:4,
+                       splitrule = c('gini', 'extratrees'),
+                       min.node.size = c(1:10))
+```
+
+
+---
+#Model Comparison 
+![](comparison1.png)
+---
+#New Target Variable - Length of Stay
+![](comparison2.png)
+---
+#Errors and Challenges
+
+- Knitting!
+- Making Presentation
+  - Warning messages attached to code
+  - Sizing Images/Graphs
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>`"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
